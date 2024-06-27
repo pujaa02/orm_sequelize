@@ -3,8 +3,8 @@
 import { DataTypes, QueryInterface } from "sequelize";
 
 /** @type {import('sequelize-cli').Migration} */
-export default{
-  async up(queryInterface:QueryInterface, Sequelize:typeof DataTypes) {
+export default {
+  async up(queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
     await queryInterface.createTable('Address', {
       address_id: {
         allowNull: false,
@@ -14,7 +14,7 @@ export default{
       },
       user_id: {
         type: Sequelize.INTEGER,
-        references:{key:'user_id',model:"User"}
+        references: { key: 'user_id', model: "User" }
       },
       city: {
         type: Sequelize.STRING
@@ -35,10 +35,13 @@ export default{
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+      },
     });
   },
-  async down(queryInterface:QueryInterface) {
+  async down(queryInterface: QueryInterface) {
     await queryInterface.dropTable('Address');
   }
 };

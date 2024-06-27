@@ -1,16 +1,16 @@
 'use strict';
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, HasMany } from 'sequelize-typescript';
 import { UserAttributes } from '../interface';
-import { Optional } from 'sequelize';
+// import { Optional } from 'sequelize';
 import Order from './order';
-import Rating from './rating';
-import Restaurant from './Restaurant';
+// import Rating from './rating';
+// import Restaurant from './Restaurant';
 import Address from './address';
 
-interface UserCreationAttributes extends Optional<UserAttributes, "user_id"> { }
+// interface UserCreationAttributes extends Optional<UserAttributes, "user_id"> { }
 
-@Table({ tableName: "User", timestamps: true })
-export default class User extends Model<UserAttributes, UserCreationAttributes> {
+@Table({ tableName: "User", timestamps: true ,paranoid:true})
+export default class User extends Model<UserAttributes> {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
@@ -40,15 +40,16 @@ export default class User extends Model<UserAttributes, UserCreationAttributes> 
   @Column({ type: DataType.STRING, allowNull: true })
   declare access_key: string | null;
 
-  @Column({ type: DataType.INTEGER, allowNull: true, defaultValue: 0 })
-  declare isdeleted: number | null;
-
-  @HasMany(() => Order)
+  @HasMany(() => Order, {
+    foreignKey: 'order_id',
+  })
   declare orders: Order[];
 
-  @HasMany(() => Address)
+  @HasMany(() => Address, {
+    foreignKey: 'address_id',
+  })
   declare address: Address[];
 
-  @BelongsToMany(() => Rating, () => Restaurant)
-  declare ratings: Rating[];
+  // @BelongsToMany(() => Rating, () => Restaurant)
+  // declare ratings: Rating[];
 }

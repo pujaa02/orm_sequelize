@@ -2,9 +2,10 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { PaymentAttributes } from '../interface';
 import Orders from './order';
+import Order from './order';
 
 
-@Table({ tableName: "Payment", timestamps: true })
+@Table({ tableName: "Payment", timestamps: true ,paranoid:true})
 export default class Payment extends Model<PaymentAttributes> {
 
     @PrimaryKey
@@ -25,8 +26,8 @@ export default class Payment extends Model<PaymentAttributes> {
     @Column(DataType.STRING)
     declare status: string;
 
-    @BelongsTo(() => Payment, {
+    @BelongsTo(() => Order, {
         foreignKey: 'order_id',
       })
-    declare payment: Payment;
+    declare payment: Order;
 }

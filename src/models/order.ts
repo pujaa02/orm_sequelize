@@ -8,7 +8,7 @@ import Payment from './payment';
 import { NonAttribute } from 'sequelize';
 
 
-@Table({ tableName: "Order", timestamps: true })
+@Table({ tableName: "Order", timestamps: true, paranoid: true })
 export default class Order extends Model<OrderAttributes> {
 
   @PrimaryKey
@@ -34,13 +34,19 @@ export default class Order extends Model<OrderAttributes> {
   @Column(DataType.INTEGER)
   declare driver_id: number;
 
-  @BelongsTo(() => User)
+  @BelongsTo(() => User, {
+    foreignKey: 'user_id',
+  })
   declare user: User;
 
-  @BelongsTo(() => Restaurant)
+  @BelongsTo(() => Restaurant, {
+    foreignKey: 'restaurant_id',
+  })
   declare restaurant: Restaurant;
 
-  @BelongsTo(() => Driver)
+  @BelongsTo(() => Driver, {
+    foreignKey: 'driver_id',
+  })
   declare driver: Driver;
 
   @HasOne(() => Payment, {

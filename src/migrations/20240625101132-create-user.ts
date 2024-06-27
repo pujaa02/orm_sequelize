@@ -28,7 +28,7 @@ export default {
         type: DataTypes.STRING,
       },
       bd: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
       },
       password: {
         type: DataTypes.STRING,
@@ -38,16 +38,15 @@ export default {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      isdeleted: {
-        type: DataTypes.INTEGER,
-        defaultValue: false,
-      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
       updatedAt: {
         allowNull: false,
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
         type: DataTypes.DATE,
       },
     });

@@ -4,7 +4,7 @@ import { MenuAttributes } from '../interface';
 import Restaurants from './Restaurant';
 
 
-@Table({ tableName: "Menu", timestamps: true })
+@Table({ tableName: "Menu", timestamps: true ,paranoid:true})
 export default class Menu extends Model<MenuAttributes> {
 
     @PrimaryKey
@@ -22,6 +22,8 @@ export default class Menu extends Model<MenuAttributes> {
     @Column(DataType.INTEGER)
     declare price: number;
 
-    @BelongsTo(() => Restaurants)
+    @BelongsTo(() => Restaurants, {
+        foreignKey: 'restaurant_id',
+      })
     declare restaurants: Restaurants;
 }

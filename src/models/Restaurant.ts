@@ -4,9 +4,10 @@ import { RestaurantAttributes } from '../interface';
 import Order from './order';
 import Rating from './rating';
 import Menu from './menu';
+// import User from './user';
 
 
-@Table({ tableName: "Restaurant", timestamps: true })
+@Table({ tableName: "Restaurant", timestamps: true, paranoid: true })
 export default class Restaurant extends Model<RestaurantAttributes> {
 
     @PrimaryKey
@@ -23,12 +24,21 @@ export default class Restaurant extends Model<RestaurantAttributes> {
     @Column(DataType.STRING)
     declare address: string;
 
-    @HasMany(() => Order)
+    @HasMany(() => Order, {
+        foreignKey: 'order_id',
+    })
     declare orders: Order[];
 
-    @HasMany(() => Rating)
+    @HasMany(() => Rating, {
+        foreignKey: 'rate_id',
+    })
     declare rating: Rating[];
 
-    @HasMany(() => Menu)
+    @HasMany(() => Menu, {
+        foreignKey: 'menu_id',
+    })
     declare menu: Menu[];
+
+    // @BelongsToMany(() => Rating, () => User)
+    // declare rate: Rating[];
 }

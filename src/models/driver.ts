@@ -4,7 +4,7 @@ import { PaymentAttributes } from '../interface';
 import Order from './order';
 
 
-@Table({ tableName: "Driver", timestamps: true })
+@Table({ tableName: "Driver", timestamps: true ,paranoid:true})
 export default class Driver extends Model<PaymentAttributes> {
 
     @PrimaryKey
@@ -24,6 +24,8 @@ export default class Driver extends Model<PaymentAttributes> {
     @Column(DataType.STRING)
     declare location: string;
 
-    @HasMany(() => Order)
+    @HasMany(() => Order, {
+        foreignKey: 'order_id',
+      })
     declare order: Order[];
 }

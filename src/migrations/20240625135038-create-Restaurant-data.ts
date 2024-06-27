@@ -16,7 +16,7 @@ export default {
         type: Sequelize.STRING
       },
       phone: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       address: {
         type: Sequelize.STRING
@@ -27,6 +27,9 @@ export default {
       },
       updatedAt: {
         allowNull: false,
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
         type: DataTypes.DATE,
       },
     });

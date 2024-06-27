@@ -4,7 +4,7 @@ import { AddressAttributes } from '../interface';
 import User from './user';
 
 
-@Table({ tableName: "Address", timestamps: true })
+@Table({ tableName: "Address", timestamps: true,paranoid:true })
 export default class Address extends Model<AddressAttributes> {
 
   @PrimaryKey
@@ -28,6 +28,8 @@ export default class Address extends Model<AddressAttributes> {
   @Column(DataType.INTEGER)
   declare pincode: number;
 
-  @BelongsTo(() => User)
+  @BelongsTo(() => User, {
+    foreignKey: 'user_id',
+  })
   declare user: User;
 }

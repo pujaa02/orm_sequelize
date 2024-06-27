@@ -31,7 +31,10 @@ export default {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+      },
     });
   },
   async down(queryInterface: QueryInterface) {
