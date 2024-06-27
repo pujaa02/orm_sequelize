@@ -1,7 +1,7 @@
 'use strict';
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { MenuAttributes } from '../interface';
-import Restaurants from './Restaurants';
+import Restaurants from './Restaurant';
 
 
 @Table({ tableName: "Menu", timestamps: true })
@@ -21,4 +21,7 @@ export default class Menu extends Model<MenuAttributes> {
 
     @Column(DataType.INTEGER)
     declare price: number;
+
+    @BelongsTo(() => Restaurants)
+    declare restaurants: Restaurants;
 }

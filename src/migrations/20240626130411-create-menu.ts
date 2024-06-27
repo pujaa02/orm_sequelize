@@ -3,9 +3,9 @@
 import { QueryInterface, DataTypes } from "sequelize";
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface:QueryInterface, Sequelize:typeof DataTypes) {
-    await queryInterface.createTable('Menus', {
+export default {
+  async up(queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
+    await queryInterface.createTable('Menu', {
       menu_id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,7 +13,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       restaurant_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { key: 'restaurant_id', model: "Restaurant" }
       },
       item_name: {
         type: Sequelize.STRING
@@ -31,7 +32,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface:QueryInterface) {
-    await queryInterface.dropTable('Menus');
+  async down(queryInterface: QueryInterface) {
+    await queryInterface.dropTable('Menu');
   }
 };

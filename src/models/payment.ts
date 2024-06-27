@@ -1,5 +1,5 @@
 'use strict';
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { PaymentAttributes } from '../interface';
 import Orders from './order';
 
@@ -24,4 +24,9 @@ export default class Payment extends Model<PaymentAttributes> {
 
     @Column(DataType.STRING)
     declare status: string;
+
+    @BelongsTo(() => Payment, {
+        foreignKey: 'order_id',
+      })
+    declare payment: Payment;
 }

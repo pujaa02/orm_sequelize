@@ -1,8 +1,9 @@
 'use strict';
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsToMany, BelongsTo } from 'sequelize-typescript';
 import { RatingAttributes } from '../interface';
 import User from './user';
-import Restaurants from './Restaurants';
+import Restaurants from './Restaurant';
+import Restaurant from './Restaurant';
 
 
 @Table({ tableName: "Rating", timestamps: true })
@@ -23,4 +24,10 @@ export default class Rating extends Model<RatingAttributes> {
 
     @Column(DataType.DECIMAL(4, 2))
     declare rating: number;
+
+    @BelongsToMany(() => User, () => Restaurant)
+    declare user: User[];
+
+    @BelongsTo(() => Restaurant)
+    declare restaurant: Restaurant;
 }

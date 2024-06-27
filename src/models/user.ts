@@ -1,7 +1,11 @@
 'use strict';
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, HasMany, BelongsToMany } from 'sequelize-typescript';
 import { UserAttributes } from '../interface';
 import { Optional } from 'sequelize';
+import Order from './order';
+import Rating from './rating';
+import Restaurant from './Restaurant';
+import Address from './address';
 
 interface UserCreationAttributes extends Optional<UserAttributes, "user_id"> { }
 
@@ -38,4 +42,13 @@ export default class User extends Model<UserAttributes, UserCreationAttributes> 
 
   @Column({ type: DataType.INTEGER, allowNull: true, defaultValue: 0 })
   declare isdeleted: number | null;
+
+  @HasMany(() => Order)
+  declare orders: Order[];
+
+  @HasMany(() => Address)
+  declare address: Address[];
+
+  @BelongsToMany(() => Rating, () => Restaurant)
+  declare ratings: Rating[];
 }

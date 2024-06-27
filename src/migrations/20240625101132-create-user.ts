@@ -5,7 +5,7 @@ import { DataTypes, QueryInterface } from 'sequelize';
 /** @type {import('sequelize-cli').Migration} */
 export default {
   async up(queryInterface: QueryInterface) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('User', {
       user_id: {
         allowNull: false,
         autoIncrement: true,
@@ -53,6 +53,6 @@ export default {
     });
   },
   async down(queryInterface: QueryInterface) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('User');
   },
 };

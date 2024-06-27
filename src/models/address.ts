@@ -1,5 +1,5 @@
 'use strict';
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { AddressAttributes } from '../interface';
 import User from './user';
 
@@ -27,4 +27,7 @@ export default class Address extends Model<AddressAttributes> {
 
   @Column(DataType.INTEGER)
   declare pincode: number;
+
+  @BelongsTo(() => User)
+  declare user: User;
 }

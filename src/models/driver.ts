@@ -1,6 +1,7 @@
 'use strict';
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, HasMany } from 'sequelize-typescript';
 import { PaymentAttributes } from '../interface';
+import Order from './order';
 
 
 @Table({ tableName: "Driver", timestamps: true })
@@ -22,4 +23,7 @@ export default class Driver extends Model<PaymentAttributes> {
 
     @Column(DataType.STRING)
     declare location: string;
+
+    @HasMany(() => Order)
+    declare order: Order[];
 }

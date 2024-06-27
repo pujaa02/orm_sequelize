@@ -3,9 +3,9 @@
 import { DataTypes, QueryInterface } from "sequelize";
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+export default{
   async up(queryInterface:QueryInterface, Sequelize:typeof DataTypes) {
-    await queryInterface.createTable('Addresses', {
+    await queryInterface.createTable('Address', {
       address_id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,7 +13,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{key:'user_id',model:"User"}
       },
       city: {
         type: Sequelize.STRING
@@ -38,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface:QueryInterface) {
-    await queryInterface.dropTable('Addresses');
+    await queryInterface.dropTable('Address');
   }
 };
