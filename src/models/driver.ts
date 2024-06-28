@@ -1,11 +1,11 @@
 'use strict';
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, HasMany } from 'sequelize-typescript';
-import { PaymentAttributes } from '../interface';
+import { DriverAttributes } from '../interface';
 import Order from './order';
 
 
 @Table({ tableName: "Driver", timestamps: true ,paranoid:true})
-export default class Driver extends Model<PaymentAttributes> {
+export default class Driver extends Model<DriverAttributes> {
 
     @PrimaryKey
     @AutoIncrement
